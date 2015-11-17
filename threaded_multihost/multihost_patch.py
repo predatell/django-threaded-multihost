@@ -4,7 +4,7 @@ import logging
 
 log = logging.getLogger('threaded_multihost')
 
-def site_get_current(self):
+def site_get_current(self, request=None):
     """Overridden version of get_current, which is multihost aware."""
     return sites.by_host()
 
