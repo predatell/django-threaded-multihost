@@ -39,7 +39,7 @@ __docformat__="restructuredtext"
 
 from django.conf import settings
 from django.contrib.sites.models import Site
-from django.db.models.loading import app_cache_ready
+from django.apps import apps
 from django.db.models.signals import post_delete, post_save
 from threaded_multihost import threadlocals
 from threaded_multihost.threadlocal_settings import get_threadlocal_setting
@@ -90,7 +90,7 @@ def by_host(host=None, id_only=False, called_recursive=None):
             site = by_settings(id_only=id_only)
 
     if host:
-        if app_cache_ready():
+        if apps.ready:
             try:
                 site = keyedcache.cache_get('SITE', host=host, id_only=id_only)
                 if id_only:
