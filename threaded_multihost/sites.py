@@ -96,7 +96,7 @@ def by_host(host=None, id_only=False, called_recursive=None):
                 if id_only:
                     site = site.id
 
-            except keyedcache.NotCachedError, nce:
+            except keyedcache.NotCachedError as nce:
                 try:
                     log.debug('looking up site by host: %s', host)
                     site = Site.objects.get(domain=host)
@@ -171,7 +171,7 @@ def by_settings(id_only=False):
 
     try:
         return Site.objects.get(pk=settings.SITE_ID)
-    except Exception, e:
+    except Exception as e:
         message = e.args[0]
         if message.find("django_site") > 0:
             site = None
@@ -187,7 +187,7 @@ def catch_sites(*args, **kwargs):
     """Listen to sites modifications due to cache flushing"""
     #keyedcache.cache_delete('SITE', children=True)
     import keyedcache
-    #print keyedcache.CACHED_KEYS
+    #print(keyedcache.CACHED_KEYS)
     #import pdb; pdb.set_trace()
     # We can not rely on the domain name of the modified/deleted site when testing. Because it is 'testserver'.
     # The following would be better, but does not work:
