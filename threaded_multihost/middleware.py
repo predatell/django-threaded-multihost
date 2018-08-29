@@ -8,10 +8,11 @@
 Branched from [http://code.djangoproject.com/wiki/CookBookthreadlocalsAndUser CookBookThreadLocalsAndUser]
 as modified by [http://sct.sphene.net Sphene Community tools].
 """
+from django.utils.deprecation import MiddlewareMixin
 
 from threaded_multihost.threadlocals import set_thread_variable, set_current_user
 
-class ThreadLocalMiddleware(object):
+class ThreadLocalMiddleware(MiddlewareMixin):
     """Middleware that gets various objects from the
     request object and saves them in thread local storage."""
 
