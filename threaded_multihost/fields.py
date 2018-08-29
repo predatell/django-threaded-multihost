@@ -25,7 +25,7 @@ class CreatorField(UserField):
 
     def get_current_user(self):
         user = threadlocals.get_current_user()
-        if user and not user.is_authenticated():
+        if user and not user.is_authenticated:
             user = None
         return user
 
